@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {FlightCardProps, FlightStatus} from "@/types";
-import {BookingAPI} from "@/lib/api/FlightAPI";
+import {BookingAPI, FlightAPI} from "@/lib/api/FlightAPI";
 import {useRouter} from "next/router";
 import {getUserId} from "@/utils/tokenService";
 
@@ -42,6 +42,21 @@ const FlightCard: React.FC<FlightCardProps> = ({flight}) => {
         } catch (error) {
             console.error("Error booking seats:", error);
             alert("An error occurred while booking seats.");
+        }
+    };
+
+
+    const handleDelete = async (flightId: number) => {
+        if (!userId) return;
+
+        try {
+            const response = await FlightAPI.deleteFlight(flightId + "");
+            alert(`Flight deleted: ${flightId}`);
+            await router.reload();
+
+        } catch (error) {
+            console.error("Error deleting a flight:", error);
+            alert("An error occurred while deleting a flight.");
         }
     };
 
@@ -100,6 +115,22 @@ const FlightCard: React.FC<FlightCardProps> = ({flight}) => {
                 >
                     Book Seats
                 </button>}
+                &#20;
+
+                <button
+                    className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                    onClick={() => handleDelete(flight.flightId)}
+                >
+                    Delete
+                </button>
+                &#20;
+                <button
+                    className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    onClick={() => router.push(`/flights`)}
+                >
+                    Edit
+                </button>
+
             </div>
         </div>
     );

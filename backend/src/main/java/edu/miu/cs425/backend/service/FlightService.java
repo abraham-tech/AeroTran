@@ -3,6 +3,7 @@ package edu.miu.cs425.backend.service;
 import edu.miu.cs425.backend.dto.SeatDTO;
 import edu.miu.cs425.backend.dto.request.FlightRequestDTO;
 import edu.miu.cs425.backend.dto.response.FlightResponseDTO;
+import edu.miu.cs425.backend.exception.ResourceNotFoundException;
 import edu.miu.cs425.backend.model.Flight;
 import edu.miu.cs425.backend.model.Seat;
 import edu.miu.cs425.backend.repository.FlightRepository;
@@ -42,6 +43,13 @@ public class FlightService {
         return flightRepository.findAll().stream()
                 .map(this::mapToFlightResponseDTO)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteFlight(Long id) {
+        if (!flightRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Flight with ID " + id + " not found");
+        }
+        flightRepository.deleteById(id);
     }
 
     public List<FlightResponseDTO> searchFlights(String departureCity, String destinationCity) {

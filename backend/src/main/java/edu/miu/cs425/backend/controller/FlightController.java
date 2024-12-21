@@ -35,4 +35,11 @@ public class FlightController {
         List<FlightResponseDTO> flights = flightService.searchFlights(departureCity, destinationCity);
         return ResponseEntity.ok(flights);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFlight(@PathVariable Long id) {
+        flightService.deleteFlight(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
