@@ -211,8 +211,73 @@ Once a booking is complete, the system generates an e-ticket containing all rele
 
 ---
 
+## Project Mangement
 
-1. **Integration with Payment Gateways: Make Payment**
+![kanban](https://github.com/user-attachments/assets/7edc1a05-dbce-43f2-8a01-9110bf069fde)
+
+---
+
+## Version Control, Continuously Testing
+
+### Project Structure on GitHub
+![image](https://github.com/user-attachments/assets/e37c363d-89f0-45e6-a9d9-eb153c099c9e)
+
+### Continuously Testing
+- Code can't be directly pushed to the `main` branch, code can only be merged through a pull request.
+- Every pull request must be reviewed by atleast 1 team member and pass a **GitHub Actions Workflow** to be able to be merged to the `main` branch.
+- This means our main branch is always functional and deployable.
+
+**GitHub Action Workflow**
+```yaml
+name: Backend Maven Build and Test
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Java 23
+      - name: Set up Java 23
+        uses: actions/setup-java@v3
+        with:
+          java-version: 23
+          distribution: zulu # Use Temurin distribution of Java
+
+      # Step 3: Cache Maven Dependencies
+      - name: Cache Maven Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('backend/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Step 4: Build and Test with Maven
+      - name: Build and Test
+        working-directory: backend
+        run: mvn clean verify
+```
+
+**Example of a Passing Test**
+![image](https://github.com/user-attachments/assets/c53c341c-aaa5-4b05-8b4b-8192422f2f5a)
+
+---
 
 ## Building the Docker Image
 
@@ -238,25 +303,3 @@ To stop the application, press Ctrl+C in the terminal and run:
 docker-compose down
 ```
 
-**Acceptance Criteria:**
-
-- Passengers can make payments securely via integrated payment gateways.
-- The system verifies the payment status and updates the booking accordingly.
-- The system provides a receipt for successful transactions.
-
-**Scenarios:**
-
-1. **Successful Payment**
-    - Given a passenger proceeds to payment for a booking
-    - When they enter valid payment details
-    - Then the system should process the payment
-    - And generate a receipt.
-2. **Failed Payment Due to Insufficient Funds**
-    - Given a passenger proceeds to payment
-    - When their account lacks sufficient funds
-    - Then the system should notify the passenger of the failure.
-3. **Failed Payment Due to Gateway Error**
-    - Given a passenger proceeds to payment
-    - But the payment gateway is down
-    - When the passenger attempts to complete payment
-    - Then the system should notify the passenger of the error and suggest retrying.
