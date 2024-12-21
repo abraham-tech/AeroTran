@@ -5,6 +5,15 @@ export enum FlightStatus {
   CANCELLED='CANCELLED'
 }
 
+// interface FormValues {
+//   flightNumber: string;
+//   departureCity: string;
+//   destinationCity: string;
+//   departureTime: string;
+//   arrivalTime: string;
+//   status: string;
+//   seatNumbers: string[];
+// }
 
 export interface Flight {
   id?: string; // Optional for create
