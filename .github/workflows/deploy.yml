@@ -19,8 +19,9 @@ jobs:
           java-version: 23
           distribution: zulu # Use Temurin distribution of Java
 
-      - name: Build with Maven
-        run: mvn clean package
+      - name: Build and Test
+        working-directory: backend
+        run: mvn clean verify
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
@@ -37,6 +38,7 @@ jobs:
         run: gcloud auth configure-docker
 
       - name: Build Docker image
+        working-directory: backend
         run: docker build -t gcr.io/${{ secrets.GCP_PROJECT }}/your-spring-boot-app .
 
       - name: Push to Google Artifact Registry
