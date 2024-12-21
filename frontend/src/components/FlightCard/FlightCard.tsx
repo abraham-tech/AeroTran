@@ -108,28 +108,29 @@ const FlightCard: React.FC<FlightCardProps> = ({flight}) => {
                         </li>
                     ))}
                 </ul>
-                {(userId) && <button
-                    style={styles.bookButton}
-                    onClick={handleBooking}
-                    disabled={selectedSeats.length === 0}
-                >
-                    Book Seats
-                </button>}
-                &#20;
-
-                <button
-                    className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                    onClick={() => handleDelete(flight.flightId)}
-                >
-                    Delete
-                </button>
-                &#20;
-                <button
-                    className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                    onClick={() => router.push(`/flights`)}
-                >
-                    Edit
-                </button>
+                {(userId) && <>
+                    <button
+                        style={styles.bookButton}
+                        onClick={handleBooking}
+                        disabled={selectedSeats.length === 0}
+                    >
+                        Book Seats
+                    </button>
+                    &nbsp;&nbsp;
+                    <button
+                        className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                        onClick={() => handleDelete(flight.flightId)}
+                    >
+                        Delete
+                    </button>
+                    &nbsp;&nbsp;
+                    <button
+                        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        onClick={() => router.push(`/flights`)}
+                    >
+                        Edit
+                    </button>
+                </>}
 
             </div>
         </div>

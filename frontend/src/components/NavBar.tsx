@@ -38,16 +38,16 @@ export default function NavBar(props: Props) {
         router.replace('/');
     }
 
-    const navItems:{name: string, color?: string, visible: boolean, onClick: ()=>void}[] = [
+    const navItems:{name: string, color?: string,bgColor?: string, visible: boolean, onClick: ()=>void}[] = [
         {name: 'CreateFlight', visible: (token!==null&&getRole()==Role.ADMIN), onClick: () => router.push("/flights/create")},
         {name: 'Tickets', visible: (token!==null), onClick: () => router.push("/tickets")},
         {name: 'Profile', visible: (token!==null), onClick: () => router.push("/profile")},
         {name: 'Flights', visible: true, onClick: () => router.push("/flights")},
         {name: 'Login', visible: token===null, onClick: () => router.push("/auth/login")},
         {name: 'Register', visible: token===null, onClick: () => router.push("/auth/register")},
-        {name: 'Admin Register', visible: token===null, onClick: () => router.push("/auth/admin/register")},
-        {name: 'Sign Out', visible: token!==null, onClick: signOut},
-        {name: getRole() || "-", color:'yellow', visible: token!==null, onClick: ()=>{}}
+        {name: 'Admin Register', color: "gold", visible: token===null, onClick: () => router.push("/auth/admin/register")},
+        {name: 'Sign Out', bgColor: 'red', color: "#fff",  visible: token!==null, onClick: signOut},
+        {name: getRole() || "-", bgColor:'gold', color: '#000', visible: (token!==null && getRole()?.valueOf() === "ADMIN"), onClick: ()=>{}}
     ];
 
     const handleDrawerToggle = () => {
@@ -65,7 +65,7 @@ export default function NavBar(props: Props) {
             <List>
                 {navItems.filter((value) => value.visible).map((item) => (
                     <ListItem key={item.name} disablePadding>
-                        <ListItemButton onClick={item.onClick} sx={{textAlign: 'center'}}>
+                        <ListItemButton onClick={item.onClick} sx={{textAlign: 'center', backgroundColor: item.bgColor}}>
                             <ListItemText primary={item.name} color={item.color || '#fff'}/>
                         </ListItemButton>
                     </ListItem>
@@ -98,7 +98,7 @@ export default function NavBar(props: Props) {
                     </Typography>
                     <Box sx={{display: {xs: 'none', sm: 'block'}}}>
                         {navItems.filter((value) => value.visible).map((item) => (
-                            <Button key={item.name} onClick={item.onClick} sx={{color: item.color || '#fff'}}>
+                            <Button key={item.name} onClick={item.onClick} sx={{color: item.color || '#fff', backgroundColor: item.bgColor, ml: 1}}>
                                 {item.name}
                             </Button>
                         ))}
