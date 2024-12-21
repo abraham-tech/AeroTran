@@ -49,7 +49,7 @@ public class SecurityConfiguration {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://aero-tran-41ipn8ih8-leuls-projects-7e7a410b.vercel.app")); // Allow Next.js app
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://aero-tran-41ipn8ih8-leuls-projects-7e7a410b.vercel.app", "http://aerotran.leultewolde.com/", "https://aerotran.leultewolde.com/"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allowed HTTP methods
         configuration.setAllowedHeaders(List.of("*")); // Allow all headers
         configuration.setAllowCredentials(true); // Allow cookies or credentials if needed
