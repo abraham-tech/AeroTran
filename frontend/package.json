@@ -1,5 +1,5 @@
 {
-  "name": "AeroTran",
+  "name": "aerotran",
   "description": "The Flight Booking System aims to simplify the flight reservation process, enabling users to book flights efficiently, manage their bookings, and access e-tickets conveniently.",
   "version": "1.0.0",
   "private": true,
@@ -17,7 +17,6 @@
     "type-check": "tsc",
     "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write",
-    "postinstall": "husky install",
     "commit": "cz"
   },
   "lint-staged": {
@@ -27,7 +26,6 @@
     ]
   },
   "dependencies": {
-    "@date-io/date-fns": "^3.0.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@faker-js/faker": "6.3.1",
@@ -40,7 +38,7 @@
     "@mui/x-date-pickers": "^7.23.2",
     "axios": "^1.7.9",
     "jsonwebtoken": "^9.0.2",
-    "next": "14.2.10",
+    "next": "14.3.0-canary.0",
     "qrcode": "^1.5.4",
     "react": "18.1.0",
     "react-dom": "18.1.0",
@@ -66,7 +64,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "husky": "7.0.4",
     "lint-staged": "12.4.1",
-    "postcss": "8.4.13",
+    "postcss": "8.4.31",
     "prettier": "2.6.2",
     "tailwindcss": "3.0.24",
     "typescript": "4.6.4"

@@ -3,8 +3,10 @@ import {Flight, Booking, Ticket} from "@/types";
 
 
 // Define the base URL for the API
-const API_BASE_URL = 'http://localhost:8080/api/flights';
-const BOOKINGS_BASE_URL = 'http://localhost:8080/api/bookings';
+const BASE_URL = "https://your-spring-boot-app-1093610135410.us-central1.run.app" || "http://localhost:8080";
+
+const API_BASE_URL = BASE_URL + '/api/flights';
+const BOOKINGS_BASE_URL = BASE_URL + '/api/bookings';
 
 
 // Axios instance for API calls
