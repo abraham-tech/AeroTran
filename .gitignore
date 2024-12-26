@@ -1,3 +1,3 @@
 # Ignore Prometheus setup files
-prometheus/
-prometheus_data/
+backend/prometheus/
+backend/prometheus_data/
